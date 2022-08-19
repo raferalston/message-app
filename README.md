@@ -4,7 +4,10 @@
 # Для запуска используйте докер
 - docker-compose up -d --build
 - docker-compose exec web python manage.py migrate
+- docker-compose exec web python manage.py createsuperuser
 - docker compose up
+
+Апи не поддерживает локализацию по таймзоне, поэтому может отличаться время создания. *Для проверки функционала можно использовать админку для начала.
 
 ## Ссылки
 localhost:8000
