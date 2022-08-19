@@ -7,6 +7,10 @@
 - docker-compose exec web python manage.py createsuperuser
 - docker compose up
 
+## Troubleshooting
+Если будет ошибка "exec /app/entrypoint.sh: no such file or directory", тогда необходимо поменять end of line sequence с CRLF на LF, у файла entrypoint.sh
+
+## Extra
 Апи не поддерживает локализацию по таймзоне, поэтому может отличаться время создания. *Для проверки функционала можно использовать админку для начала.
 
 ## Ссылки
