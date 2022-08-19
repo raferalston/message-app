@@ -13,10 +13,13 @@ class MessageSenderModel(models.Model):
         return f'Сообщение: {self.message} Тег: {self.client_tag}'
 
 class MessageModel(models.Model):
+    class Meta:
+        ordering = ['-status']
+    
     datetime_stamp = models.DateTimeField()
     status = models.BooleanField(default=False)
     message_sender_id = models.ForeignKey(MessageSenderModel, null=False, blank=False, on_delete=models.CASCADE)
     client_id = models.ForeignKey(ClientModel, null=False, blank=False, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.datetime_stamp} {self.status}'
+        return f'{self.client_id} {self.datetime_stamp} {self.status}'
