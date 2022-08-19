@@ -34,7 +34,8 @@ class MessageModel(models.Model):
 def messaging(sender, instance, created, **kwargs):
     if created:
         time = instance.start_datetime
-        if time < timezone.now():
+        #TODO: change timezone for proper compare
+        if time.replace(tzinfo=None) < timezone.now().replace(tzinfo=None):
             message_task.delay(instance.id, instance.end_datetime)
         else:
             message_task.apply_async(args=[instance.id, instance.end_datetime], eta=time)
