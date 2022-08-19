@@ -32,6 +32,7 @@ def start_messaging(model_object, end_time):
     clients = ClientModel.objects.filter(tag=model_object.client_tag)
     if clients:
         for client in clients:
+            #TODO: Тут будут проблемы с временем и таймзоной. Не успевал реализовать.
             if datetime.now() > datetime.strptime(end_time, '%Y-%m-%dT%H:%M:%SZ'):
                 break
             message_model = model.objects.create(
