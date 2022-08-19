@@ -1,3 +1,4 @@
+from datetime import datetime
 from rest_framework import viewsets
 from rest_framework.response import Response
 
@@ -30,17 +31,11 @@ class MessageSenderStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = self.get_queryset()
         obj = get_object_or_404(queryset, pk=pk)
         serializer = self.serializer_class(obj)
-        return Response(serializer)
-
-    # def retrieve(self, request, pk=None):
-    #     queryset = self.get_queryset()
-    #     obj = get_object_or_404(queryset, pk=pk)
-    #     serializer = self.serializer_class(obj)
-    #     modified_data = {}
-    #     messages_obj = MessageModel.objects.filter(message_sender_id=pk)
-    #     related_count = messages_obj.filter(status=True).count()
-    #     modified_data['sended_messages'] = related_count
-    #     modified_data['messages'] = MessageModelSerializer(messages_obj, many=True).data
-    #     modified_data.update(serializer.data)
-
-    #     return Response(modified_data)
+        modified_data = {}
+        messages_obj = MessageModel.objects.filter(message_sender_id=pk)
+        related_count = messages_obj.filter(status=True).count()
+        modified_data['sended_messages'] = related_count
+        modified_data['messages'] = MessageModelSerializer(messages_obj, many=True).data
+        modified_data.update(serializer.data)
+        
+        return Response(modified_data)

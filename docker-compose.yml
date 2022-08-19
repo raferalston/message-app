@@ -12,3 +12,29 @@ services:
       - DEBUG=1
       - SECRET_KEY=django-insecure-n^eygt3ww1cntn$_ueg)(9h&%f)bnkv7)6rz8p!3ci^_7)29ak
       - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+    depends_on:
+    - redis
+  redis:
+    image: redis:alpine
+  celery:
+    build: ./message-app-project
+    command: celery -A config worker -l info
+    volumes:
+      - ./message-app-project/:/app/
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=django-insecure-n^eygt3ww1cntn$_ueg)(9h&%f)bnkv7)6rz8p!3ci^_7)29ak
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+    depends_on:
+      - redis
+  celery-beat:
+    build: ./message-app-project
+    command: celery -A config beat -l info
+    volumes:
+      - ./message-app-project/:/app/
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=django-insecure-n^eygt3ww1cntn$_ueg)(9h&%f)bnkv7)6rz8p!3ci^_7)29ak
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+    depends_on:
+      - redis
