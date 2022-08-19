@@ -20,8 +20,8 @@ def send_message(pk, phone, text):
     }
     r = requests.post(url, json=data, headers=headers)
     status = r.json().get('message', False)
-    # TODO: spending to much time to convert response date time, decide to use basic python object
-    # really dont bother about accurate time right now.
+    # TODO: Тут время может не совпадать с временем сервера, а так же не стал парсить время из ответа, для ускорения
+    # решения.
     date_time = datetime.now() 
     return status, date_time
 
