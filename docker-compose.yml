@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./message-app-project
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./message-app-project/:/app/
+    ports:
+      - 8000:8000
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=django-insecure-n^eygt3ww1cntn$_ueg)(9h&%f)bnkv7)6rz8p!3ci^_7)29ak
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
