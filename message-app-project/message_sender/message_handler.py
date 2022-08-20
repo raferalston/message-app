@@ -27,14 +27,17 @@ def send_message(pk, phone, text):
 
 def start_messaging(model_object, end_time):
     from .models import MessageModel, MessageSenderModel
+
     model_object = MessageSenderModel.objects.get(id=model_object)
     model = MessageModel
     clients = ClientModel.objects.filter(tag=model_object.client_tag)
+
     if clients:
         for client in clients:
             #TODO: Тут будут проблемы с временем и таймзоной. Не успевал реализовать.
             if datetime.now() > datetime.strptime(end_time, '%Y-%m-%dT%H:%M:%SZ'):
                 break
+
             message_model = model.objects.create(
                 datetime_stamp=datetime.now(),
                 message_sender_id=model_object,
@@ -46,9 +49,11 @@ def start_messaging(model_object, end_time):
                 phone=client.phone, 
                 text=model_object.message
                 )
+
             if status == 'OK':
                 message_model.status = True
                 message_model.datetime_stamp = date_time
                 message_model.save()
+                
         return True
     return False

@@ -4,7 +4,6 @@ from .models import MessageSenderModel, MessageModel
 
 
 class MessageSenderModelSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = MessageSenderModel
         fields = [
@@ -12,7 +11,6 @@ class MessageSenderModelSerializer(serializers.ModelSerializer):
         ]
 
 class MessageModelSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = MessageModel
         fields = [
