@@ -9,7 +9,11 @@
 - docker-compose exec web python manage.py populate_db
 - > создаст несколько пользователей в базу с тегами even и odd
 - docker compose up
-  
+
+## Тестирование 
+- docker-compose exec web python manage.py test
+> С запущенным сервером будет вызвана ошибка DoesNotExists, так как тесты не учитывают использование celery/redis. Это можно исправить если использовать mock тестирование
+
 ## Troubleshooting
 Если будет ошибка "exec /app/entrypoint.sh: no such file or directory", тогда необходимо поменять end of line sequence с CRLF на LF, у файла entrypoint.sh
 
@@ -18,11 +22,14 @@
 
 ## Links
 localhost:8000
-- /api/ 
 > Входная точка
-- /clients/ 
+- /api/ 
 > CRUD для клиентов
-- /messages/
+- /clients/
+- /clients/int:pk
 > CRUD для рассылки
-- /messages-statistics/<int:pk>
+- /messages/
+- /messages/int:pk
 > read-only для статистики
+- /messages-statistics/
+- /messages-statistics/int:pk
