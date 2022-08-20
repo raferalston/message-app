@@ -25,6 +25,7 @@ class MessageSenderStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
             related_count = messages_obj.filter(status=True).count()
             d['sended_messages'] = related_count
             d['messages'] = MessageModelSerializer(messages_obj, many=True).data
+            
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
