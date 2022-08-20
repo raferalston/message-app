@@ -6,8 +6,9 @@
 - docker-compose up -d --build
 - docker-compose exec web python manage.py migrate
 - docker-compose exec web python manage.py createsuperuser
+- docker-compose exec web python manage.py populate_db
+- > создаст несколько пользователей в базу с тегами even и odd
 - docker compose up
-- *Если успею перед проверкой добавить management команду для создания данных в базе. Тут будет команда.
   
 ## Troubleshooting
 Если будет ошибка "exec /app/entrypoint.sh: no such file or directory", тогда необходимо поменять end of line sequence с CRLF на LF, у файла entrypoint.sh
