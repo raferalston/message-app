@@ -18,6 +18,7 @@ def send_message(pk, phone, text):
         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIzNjAyMTUsImlzcyI6ImZhYnJpcXVlIiwibmFtZSI6IlBodWtldFRhYmxldG9wIn0.uPZEV_Ic1pKSMR10q3pJoBVdgUjkjx3Lsmu96dLha0Y',
         'Content-Type': 'application/json'
     }
+    # TODO: Нужен логгер
     r = requests.post(url, json=data, headers=headers)
     status = r.json().get('message', False)
     # TODO: Тут время может не совпадать с временем сервера, а так же не стал парсить время из ответа, для ускорения
