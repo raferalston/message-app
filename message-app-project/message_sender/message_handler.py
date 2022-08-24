@@ -38,7 +38,7 @@ def start_messaging(model_object, end_time):
             #TODO: Тут будут проблемы с временем и таймзоной. Не успевал реализовать.
             if datetime.now() > datetime.strptime(end_time, '%Y-%m-%dT%H:%M:%SZ'):
                 break
-
+            #TODO: Тут необходимо добавить transactions
             message_model = model.objects.create(
                 datetime_stamp=datetime.now(),
                 message_sender_id=model_object,
@@ -58,3 +58,4 @@ def start_messaging(model_object, end_time):
                 
         return True
     return False
+
